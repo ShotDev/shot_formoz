@@ -1,4 +1,6 @@
 ShotFormoz::Application.routes.draw do
+  resources :bands
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
