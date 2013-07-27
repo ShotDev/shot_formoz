@@ -31,4 +31,17 @@ describe User do
       matched.should == false
     end
   end
+
+  describe "relations" do
+    it "has and belongs to bands" do
+      band1 = FactoryGirl.create :band
+      band2 = FactoryGirl.create :band
+
+      user = FactoryGirl.create :user
+
+      user.band_ids = [ band1.id, band2.id ]
+
+      user.bands.length.should == 2
+    end
+  end
 end
