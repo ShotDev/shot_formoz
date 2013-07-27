@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130727060015) do
+ActiveRecord::Schema.define(:version => 20130727060918) do
 
   create_table "bands", :force => true do |t|
     t.string   "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20130727060015) do
     t.string   "stage"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "photo_url"
   end
 
 end

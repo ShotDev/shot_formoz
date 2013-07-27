@@ -6,5 +6,6 @@ FactoryGirl.define do
     start_time "2013-07-27 14:00:15"
     end_time "2013-07-27 14:00:15"
     stage "MyString"
+    photo_url "MyString"
   end
 end
