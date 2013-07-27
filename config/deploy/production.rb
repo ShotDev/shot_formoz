@@ -1,5 +1,5 @@
 set :deploy_to, "/home/rails/shot_formoz_production"
-server "yteam.thekono.com", :app, :web, :db, :primary => true
+server "54.251.122.231", :app, :web, :db, :primary => true
 set :branch, :master
 
 namespace :deploy do
