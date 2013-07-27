@@ -18,7 +18,7 @@ class UsersController < ApplicationController
         :facebook_token => params[:facebook_token]
       }).first_or_create
 
-      session[:user_id] = user.id
+      session[:user_id] = user.id.to_s
       render :json => user
     else
       session[:user_id] = nil

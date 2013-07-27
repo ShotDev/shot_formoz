@@ -7,8 +7,9 @@ class BandsController < ApplicationController
     if session[:user_id] != params[:user_id]
       render :json => { :reason => "user not authorized." },
              :status => 401
-      return
+      return false
     end
+    true
   end
 
   def ensure_band_ids_exists
@@ -21,7 +22,13 @@ class BandsController < ApplicationController
   end
 
   def index
-    render :json => Band.all
+    if params[:user_id]
+      return unless ensure_user_loggedin
+      user = User.where(:id => params[:user_id]).first
+      render :json => user.bands
+    else
+      render :json => Band.all
+    end
   end
 
   def create
