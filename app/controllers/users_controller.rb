@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :ensure_facebook_id_and_token_in_params
 
   def ensure_facebook_id_and_token_in_params
-    render_400("facebook_id") unless params[:facebook_id].kind_of? String
+    render_400("facebook_id") and return unless params[:facebook_id].kind_of? String 
     render_400("facebook_token") unless params[:facebook_token].kind_of? String
   end
 
@@ -13,8 +13,11 @@ class UsersController < ApplicationController
 
   def login
     if User.facebook_token_matched? params[:facebook_id], params[:facebook_token]
-      user = User.find_or_create :facebook_id => params[:facebook_id],
-                                 :facebook_token => params[:facebook_token]
+      user = User.where({
+        :facebook_id => params[:facebook_id],
+        :facebook_token => params[:facebook_token]
+      }).first_or_create
+
       session[:user_id] = user.id
       render :json => user
     else

@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   FB_GRAPH_URL = "https://graph.facebook.com"
+  include HTTParty
   attr_accessible :facebook_id, :facebook_token
 
   def self.facebook_token_matched? facebook_id, facebook_token

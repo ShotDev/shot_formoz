@@ -47,3 +47,5 @@ gem "spork"
 gem "capistrano"
 gem "capistrano-ext"
 gem "rvm-capistrano"
+
+gem "httparty"
