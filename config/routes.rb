@@ -1,6 +1,10 @@
 ShotFormoz::Application.routes.draw do
   resources :bands
 
+  resources :users do
+    resources :bands
+  end
+
   match "/users/login" => "users#login"
 
   # The priority is based upon order of creation:
