@@ -8,8 +8,7 @@ set :stages, %w(production development)
 set :default_stage, "development"
 
 set :application, "shot_formoz"
-#TODO add repository here
-set :repository,  ""
+set :repository,  "https://github.com/ShotDev/shot_formoz.git"
 set :rails_env, "production" #added for delayed job  
 
 set :scm, :git 
