@@ -4,8 +4,8 @@ describe User do
   describe "User::facebook_token_matched?" do
     let(:facebook_id) { "the-id" }
     let(:facebook_token) { "the-token" }
-    let(:mock_success_response) { stub(:body => { :id => "the-id" }.to_json) }
-    let(:mock_failed_response) { stub(:body => { :error => "the-error" }.to_json) }
+    let(:mock_success_response) { double(:body => { :id => "the-id" }.to_json) }
+    let(:mock_failed_response) { double(:body => { :error => "the-error" }.to_json) }
 
     it "sends request to facebook with token" do
       User.should_receive(:get).

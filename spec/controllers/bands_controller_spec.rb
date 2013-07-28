@@ -23,7 +23,7 @@ describe BandsController do
       before(:each) do
         session[:user_id] = user_id
 
-        @mock_user = mock( :bands => mock_bands )
+        @mock_user = double( :bands => mock_bands )
         User.stub(:where => [ @mock_user ])
 
       end

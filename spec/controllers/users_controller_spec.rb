@@ -47,7 +47,7 @@ describe UsersController do
       it "sets session[user_id] to user id" do
         post :login, :facebook_token => "the-token", :facebook_id => "the-id"
 
-        session["user_id"].should == @mock_user.id
+        session["user_id"].should == @mock_user.id.to_s
       end
     end
 
