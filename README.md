@@ -17,6 +17,7 @@ Shot Formoz
 
         {
           id: 100
+          , bands: []
         }
 
 - 409: token and id not matched
