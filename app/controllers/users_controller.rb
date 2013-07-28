@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       }).first_or_create
 
       session[:user_id] = user.id.to_s
-      render :json => user
+      render :json => user.to_json(:include => :bands)
     else
       session[:user_id] = nil
       render :json => { :reason => "facebook id and token not matched" },

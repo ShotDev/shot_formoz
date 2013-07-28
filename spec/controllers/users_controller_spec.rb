@@ -42,6 +42,7 @@ describe UsersController do
         post :login, :facebook_token => "the-token", :facebook_id => "the-id"
 
         JSON.parse(response.body)["id"].should == @mock_user.id
+        JSON.parse(response.body).should have_key("bands")
       end
 
       it "sets session[user_id] to user id" do
