@@ -13,9 +13,12 @@ class UsersController < ApplicationController
 
   def login
     if User.facebook_token_matched? params[:facebook_id], params[:facebook_token]
-      user = User.where({
-        :facebook_id => params[:facebook_id]
-      }).first_or_create
+      user = User.where({ :facebook_id => params[:facebook_id] }).first
+
+      if user.nil?
+        user = User.create({ :facebook_id => params[:facebook_id], 
+                             :facebook_token => params[:facebook_token] })
+      end
 
       session[:user_id] = user.id.to_s
       render :json => user.to_json(:include => :bands, :only => :id)

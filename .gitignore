@@ -16,3 +16,4 @@
 config/local_settings.yml
 config/database.yml
 *.swp
+public/client

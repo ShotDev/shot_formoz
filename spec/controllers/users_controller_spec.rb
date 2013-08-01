@@ -22,22 +22,22 @@ describe UsersController do
     describe "if facebook token-id matched" do
       before(:each) do
         @mock_user = FactoryGirl.create :user
-        @mock_where = double( :first_or_create => @mock_user )
+        @mock_where = []
         User.stub(:facebook_token_matched? => true)
         User.stub(:where => @mock_where)
       end
 
-      it "find or create a user" do
-        User.should_receive(:where).with({
-          :facebook_id => "the-id"
-        }).and_return(@mock_where)
+      it "creates a user if not found" do
 
-        @mock_where.should_receive(:first_or_create).and_return(@mock_user)
+        User.should_receive(:create).and_return(@mock_user)
 
         post :login, :facebook_token => "the-token", :facebook_id => "the-id"
       end
 
+
       it "returns user" do
+        @mock_where << @mock_user
+
         post :login, :facebook_token => "the-token", :facebook_id => "the-id"
 
         JSON.parse(response.body)["id"].should == @mock_user.id
@@ -45,6 +45,8 @@ describe UsersController do
       end
 
       it "sets session[user_id] to user id" do
+        @mock_where << @mock_user
+
         post :login, :facebook_token => "the-token", :facebook_id => "the-id"
 
         session["user_id"].should == @mock_user.id.to_s
