@@ -1,3 +1,5 @@
+require 'digest'
+
 class UsersController < ApplicationController
   before_filter :ensure_facebook_id_and_token_in_params
 
@@ -20,10 +22,11 @@ class UsersController < ApplicationController
                              :facebook_token => params[:facebook_token] })
       end
 
-      session[:user_id] = user.id.to_s
+      cookies[:token] = Digest::MD5.hexdigest(user.id.to_s)
+
       render :json => user.to_json(:include => :bands, :only => :id)
     else
-      session[:user_id] = nil
+      cookies[:token] = nil
       render :json => { :reason => "facebook id and token not matched" },
              :status => 409
     end

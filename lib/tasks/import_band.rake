@@ -21,7 +21,7 @@ end
 
 def convert_time_to_db_format original
   t = DateTime.strptime(original, "%m/%d/%Y %T")  
-  t.strftime("%Y-%m-%d %T")
+  t.strftime("%Y-%m-%d %H:%M:%S")
 end
 
 namespace :shot do

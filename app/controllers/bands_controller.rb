@@ -1,10 +1,11 @@
+require 'digest'
 class BandsController < ApplicationController
   before_filter :ensure_user_loggedin, 
                 :ensure_band_ids_exists, 
                 :only => :create
 
   def ensure_user_loggedin
-    if session[:user_id] != params[:user_id]
+    if cookies[:token] != Digest::MD5.hexdigest(params[:user_id])
       render :json => { :reason => "user not authorized." },
              :status => 401
       return false
