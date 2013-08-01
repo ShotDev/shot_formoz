@@ -29,7 +29,6 @@ describe UsersController do
 
       it "find or create a user" do
         User.should_receive(:where).with({
-          :facebook_token => "the-token",
           :facebook_id => "the-id"
         }).and_return(@mock_where)
 
